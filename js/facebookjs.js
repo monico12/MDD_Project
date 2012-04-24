@@ -3,7 +3,7 @@
 
 (function($){
 
-
+//mongohq stuff
 function mongoGetDocs(q){
   //var q = {"csvDays":"1"}
   $.ajax({
@@ -43,8 +43,24 @@ mongoCreateDocument = function(obj){
       console.log("Mongo: fail",data);
     }
    });
+}
 
-
+mongoUpdateDocument = function(obj){
+	$.ajax({
+    url: 'https://api.mongohq.com/databases/Tournaments4Gamers/collections/events/documents',
+    type: 'PUT',
+    dataType: 'json',
+    data: {
+      "_apikey":"wc4gj9zp6pmmwt55zqak",
+      "document": obj
+    },
+    success: function(r) {
+      console.log("Mongo: success",r);
+    },
+    error: function(data) {
+      console.log("Mongo: fail",data);
+    }
+   });
 }
 
 
@@ -139,6 +155,7 @@ $.getJSON('https://api.mongohq.com/databases/Tournaments4Gamers/collections/even
 
 
 $('#search').live('click', function(e){
+	
 	$("#searchlist").html("");
 	$.mongohq.authenticate({ apikey: 'wc4gj9zp6pmmwt55zqak'});
 	$.mongohq.documents.all({
@@ -150,28 +167,44 @@ $('#search').live('click', function(e){
 			}*/
 			$(events).each(function(){
   				$("#searchlist").append("<li><a data-eventid='"+this._id.$oid + "' href='#eventdetails'>" + this.name + "</a></li>");
-  				//console.log(this._id.$oid);	
+  				console.log(this._id.$oid);
+  				//eventID = this._id.$oid;
   			});
   			
-  				
+  			$("li a").click(function(){
+  				var tarID = $(this).data('eventid');
+  				console.log(tarID);
+  				$(events).each(function(){
+  					if(this._id.$oid == tarID){
+  						$("#tournamentname").html(this.name);
+  						$("#eventdate").html("Date: " + this.date);
+  						$("#start_time").html("From:  " + this.start_time);
+  						$("#end_time").html("To:  " + this.end_time);
+  						$("#detaildescription").html(this.description);
+  					}
+  				});
+  			});  			
   		}
 	});
+	
+	
+ 
+	
 });
-
-  
+/*
   $("li a").click(function(){
   	var tarID = $(this).data('eventid');
   	
   	$(events).each(function(){
-  		if(this.itemID == tarID){
+  		//if(this.itemID == tarID){
   			$("#tournamentname").html(this.name);
   			$("#eventdate").html("Date: " + this.date);
   			$("#start_time").html("From:  " + this.start_time);
   			$("#end_time").html("To:  " + this.end_time);
   			$("#detaildescription").html(this.description);
-  		}
+  		//}
   	});
-  });
+  });*/
 
 
 $('#logout').live('click',function(e){
@@ -185,24 +218,32 @@ $('#created-event-form').live('submit',function(e){
 		title = $('#title').val(),
 		userDescription = $('#description').val(),
 		date = $('#date').val(),
+		start_time = $('#start_time').val(),
+		end_time = $('#end_time').val(),
+		location = $('#location').val(),
 		people = [];
 		
 		
 		//calculating time for Facebook API
 		//var time = $('#time').val().substr(0,4) + ':00';
-		var time = "13:00"
+		//still being hard coded in
+		var time = end_time;
 		var complete = date + ' ' + time;
 		console.log(complete);
 		var timeComplete = parseInt(Date.parse(complete)/1000);
 		console.log(timeComplete);
-		createEvents(title,userDescription,people,timeComplete,"default");
+		createEvents(title,userDescription,people,timeComplete,location);
 		
 		
 		//create event in database
 		
 		var data = 
 				{
-  					'name' : 'something else'
+  					'name' : title,
+  					'description' : userDescription,
+  					'date' : date,
+  					'start_time' : start_time,
+  					'end_time' : end_time
   				}
 		
 		mongoCreateDocument(data);
