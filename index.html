@@ -1,0 +1,343 @@
+
+<!doctype html>  
+<html lang="en">
+<head>
+
+	<meta charset="utf-8">
+	
+	<title>Tournys 4 Gamers</title>
+	
+	<!--  Mobile viewport optimized: j.mp/bplateviewport -->
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Mobile IE needs ClearType for smoothing fonts -->
+	<meta http-equiv="cleartype" content="on">
+	
+	<!-- StyleSheets here -->
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.css" /> <!-- JQuery Mobile b3   -->
+	<!-- <link type="text/css" href="css/jquery-ui-1.8.19.custom.css" rel="Stylesheet" /> -->
+	
+
+	<style type="text/css">
+		
+	</style>
+	<!-- JavaScript topside-->
+	<!--<script src="js/libs/modernizr.custom.min.js"></script>-->
+
+</head>
+
+<body>
+<!-- =================================LOGIN================================= -->
+	<div id="loginpage" data-role="page">
+		<div data-role="header">
+			<h1>Login</h1>
+		</div><!-- /header -->
+			<fb:login-button onlogin="login();" id="login" scope="create_event, user_events">Login with Facebook</fb:login-button>
+	</div><!-- loginpage -->
+
+
+<!-- =================================HOME================================= -->
+	<div id="homepage" data-role="page" class="type-home" data-theme="a">
+		<div data-role="header">
+			<h1>Home</h1>
+			<a href="#createpage" data-role="button" data-icon="plus" data-iconpos="notext" class="ui-btn-right"></a>
+			<a href="#loginpage" data-role="button" class="ui-btn-left" id="logout">Log Out</a>
+		</div><!-- /header -->
+		<div data-role="content">
+			
+		</div>
+		
+		<div data-role="footer" data-position="fixed">		
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#featuredpage" data-role="button" data-icon="star" data-iconpos="top">Featured</a></li>
+					<li><a href="#categoriespage" data-role="button" data-icon="grid" data-iconpos="top">Categories</a></li>
+					<li><a href="#searchpage" data-role="button" data-icon="search" data-iconpos="top" id="search">Search</a></li>
+					<li><a href="#homepage" data-role="button" data-icon="home" data-iconpos="top">Home</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!--footer-->
+	</div><!-- home -->
+	
+<!-- =================================SEACH================================= -->
+	<div id="searchpage" data-role="page" class="type-home">
+		<div data-role="header">
+			<h1>Search</h1>
+		</div><!-- /header -->
+		<div data-role="content">
+
+			<ul data-role="listview" data-inset="true" data-filter="true" id="searchlist">
+			
+			</ul>
+			
+		</div>		
+
+		<div data-role="footer" data-position="fixed">		
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#featuredpage" data-role="button" data-icon="star" data-iconpos="top">Featured</a></li>
+					<li><a href="#categoriespage" data-role="button" data-icon="grid" data-iconpos="top">Categories</a></li>
+					<li><a href="#searchpage" data-role="button" data-icon="search" data-iconpos="top" id="search">Search</a></li>
+					<li><a href="#homepage" data-role="button" data-icon="home" data-iconpos="top">Home</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!--footer-->
+	</div><!-- home -->
+
+
+
+<!-- =================================FEATURED================================= -->
+<div id="featuredpage" data-role="page" class="type-home">
+		<div data-role="header">
+			<h1>Featured</h1>
+		</div><!-- /header -->
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" data-filter="true" id="featuredlist">
+			
+			</ul>
+		</div><!-- content -->
+
+		<div data-role="footer" data-position="fixed">		
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#featuredpage" data-role="button" data-icon="star" data-iconpos="top">Featured</a></li>
+					<li><a href="#categoriespage" data-role="button" data-icon="grid" data-iconpos="top">Categories</a></li>
+					<li><a href="#searchpage" data-role="button" data-icon="search" data-iconpos="top" id="search">Search</a></li>
+					<li><a href="#homepage" data-role="button" data-icon="home" data-iconpos="top">Home</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!--footer-->
+	</div><!-- home -->
+
+<!-- =================================CATEGORIES================================= -->
+<div id="categoriespage" data-role="page" class="type-home">
+		<div data-role="header">
+			<h1>Categories</h1>
+		</div><!-- /header -->
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" id="categorieslist">
+				<li><a href="#games">Games</a></li>
+				<li><a href="#online">Online</a></li>
+				<li><a href="#lan">Lan</a></li>
+			</ul>
+		</div><!-- content -->
+
+		<div data-role="footer" data-position="fixed">		
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#featuredpage" data-role="button" data-icon="star" data-iconpos="top">Featured</a></li>
+					<li><a href="#categoriespage" data-role="button" data-icon="grid" data-iconpos="top">Categories</a></li>
+					<li><a href="#searchpage" data-role="button" data-icon="search" data-iconpos="top" id="search">Search</a></li>
+					<li><a href="#homepage" data-role="button" data-icon="home" data-iconpos="top">Home</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!--footer-->
+	</div><!-- home -->
+
+<!-- =================================GAMES================================= -->
+<div id="games" data-role="page" class="type-home">
+		<div data-role="header">
+			<a href="#categoriespage"  data-role="button" data-icon="back" class="ui-btn-left">Back</a>
+			<h1>Games</h1>
+		</div><!-- /header -->
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" id="gamelist">
+				<li><a href="#cod">Call of Duty</a></li>
+				<li><a href="#starcraft">Starcraft</a></li>
+				<li><a href="#sf">Street Fighter</a></li>
+				<li><a href="#madden">Madden</a></li>
+			</ul>
+		</div><!-- content -->
+
+		<div data-role="footer" data-position="fixed">		
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#featuredpage" data-role="button" data-icon="star" data-iconpos="top">Featured</a></li>
+					<li><a href="#categoriespage" data-role="button" data-icon="grid" data-iconpos="top">Categories</a></li>
+					<li><a href="#searchpage" data-role="button" data-icon="search" data-iconpos="top" id="search">Search</a></li>
+					<li><a href="#homepage" data-role="button" data-icon="home" data-iconpos="top">Home</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!--footer-->
+	</div><!-- home -->
+<!-- =================================ONLINE================================= -->
+<div id="online" data-role="page" class="type-home">
+		<div data-role="header">
+			<a href="#categoriespage"  data-role="button" data-icon="back" class="ui-btn-left">Back</a>
+			<h1>Games</h1>
+		</div><!-- /header -->
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" id="onlinelist">
+				
+			</ul>
+		</div><!-- content -->
+
+		<div data-role="footer" data-position="fixed">		
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#featuredpage" data-role="button" data-icon="star" data-iconpos="top">Featured</a></li>
+					<li><a href="#categoriespage" data-role="button" data-icon="grid" data-iconpos="top">Categories</a></li>
+					<li><a href="#searchpage" data-role="button" data-icon="search" data-iconpos="top" id="search">Search</a></li>
+					<li><a href="#homepage" data-role="button" data-icon="home" data-iconpos="top">Home</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!--footer-->
+	</div><!-- home -->
+<!-- =================================LAN================================= -->
+<div id="lan" data-role="page" class="type-home">
+		<div data-role="header">
+			<a href="#categoriespage"  data-role="button" data-icon="back" class="ui-btn-left">Back</a>
+			<h1>Games</h1>
+		</div><!-- /header -->
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" id="lanlist">
+				
+			</ul>
+		</div><!-- content -->
+
+		<div data-role="footer" data-position="fixed">		
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#featuredpage" data-role="button" data-icon="star" data-iconpos="top">Featured</a></li>
+					<li><a href="#categoriespage" data-role="button" data-icon="grid" data-iconpos="top">Categories</a></li>
+					<li><a href="#searchpage" data-role="button" data-icon="search" data-iconpos="top" id="search">Search</a></li>
+					<li><a href="#homepage" data-role="button" data-icon="home" data-iconpos="top">Home</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!--footer-->
+	</div><!-- home -->
+
+
+
+<!-- =================================CREATE================================= -->
+<div id="createpage" data-role="page" class="type-home">
+		<div data-role="header">
+			<a href="#homepage"  data-role="button" data-icon="delete" class="ui-btn-left">Cancel</a>
+			<h1>Create</h1>
+		</div><!-- /header -->
+		<div data-role="content">
+		
+			<div data-role="content" id="created-event">
+				<form action="index.html/#homepage" method="createEvents();" id="created-event-form">
+					<div data-role="fieldcontain">
+						<input type="text" name="title" id="title" value="" placeholder="Title" class="required" minlength="5"/>
+					</div>
+					<div data-role="fieldcontain">
+						<textarea name="textarea" id="description" placeholder="description" class="required" minlength="5"></textarea>
+					</div>
+					<div data-role="fieldcontain">
+						<input name="date" id="date" type="date" data-role="datebox" class="required" minlength="5">
+					</div>
+					<!--
+					<div data-role="fieldcontain">
+						<select id="type">
+  							<option>Lan</option>
+  							<option>Online</option>
+						</select>
+					</div>
+					 
+					<div data-role="fieldcontain">
+						<input type="text" name="location" id="location" value="" placeholder="Location" class="required" minlength="5"/>
+					</div>
+					 -->
+					<div data-role="fieldcontain" class="ui-hide-label">
+						<input type="submit" value="Create Event" id="create-event-btn" class="submit"/>
+					</div>
+				</form>
+			</div>
+		</div><!-- content -->
+		
+			
+		</div>
+		
+		<div data-role="footer" data-position="fixed">		
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#featuredpage" data-role="button" data-icon="star" data-iconpos="top">Featured</a></li>
+					<li><a href="#categoriespage" data-role="button" data-icon="grid" data-iconpos="top">Categories</a></li>
+					<li><a href="#searchpage" data-role="button" data-icon="search" data-iconpos="top"id="search">Search</a></li>
+					<li><a href="#homepage" data-role="button" data-icon="home" data-iconpos="top">Home</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!--footer-->
+	</div><!-- createpage -->
+
+<!-- =================================EVENT DETAILS================================= -->
+<div id="eventdetails" data-role="page" class="type-home">
+		<div data-role="header">
+			<a href="#searchpage"  data-role="button" data-icon="back" class="ui-btn-left">Back</a>
+			<h1>Details</h1>
+			<a href="#editpage"  data-role="button" class="ui-btn-right">Edit</a>
+		</div><!-- /header -->
+		<div data-role="content">
+			
+			<h2 id="tournamentname"></h2>
+			<div class="ui-grid-a">
+				<div class="ui-block-a"><img src="http://inklingmedia.net/wp-content/uploads/2010/11/event-image1.png"></div>
+				<div class="ui-block-b" id="timedate">
+					<p id="eventdate"></p>
+					<p id="start_time"></p>
+					<p id="end_time"></p>
+				</div>
+			</div><!-- /grid-a -->
+			<p id="detaildescription">blah blah</p>
+			
+		</div><!-- content -->
+		<div data-role="footer" data-position="fixed">		
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#featuredpage" data-role="button" data-icon="star" data-iconpos="top">Featured</a></li>
+					<li><a href="#categoriespage" data-role="button" data-icon="grid" data-iconpos="top">Categories</a></li>
+					<li><a href="#searchpage" data-role="button" data-icon="search" data-iconpos="top"id="search">Search</a></li>
+					<li><a href="#homepage" data-role="button" data-icon="home" data-iconpos="top">Home</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!--footer-->
+</div><!-- createpage -->
+	
+
+
+<!-- =================================EDIT PAGE================================= -->	
+<div id="editpage" data-role="page" class="type-home">
+		<div data-role="header">
+			<a href="#eventdetails"  data-role="button" data-icon="back" class="ui-btn-left">Back</a>
+			<h1>Edit</h1>
+			<a href="#searchpage"  data-role="button" class="ui-btn-right">Save</a>
+		</div><!-- /header -->
+		<div data-role="content">
+			
+			
+		</div><!-- content -->
+		<div data-role="footer" data-position="fixed">		
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#featuredpage" data-role="button" data-icon="star" data-iconpos="top">Featured</a></li>
+					<li><a href="#categoriespage" data-role="button" data-icon="grid" data-iconpos="top">Categories</a></li>
+					<li><a href="#searchpage" data-role="button" data-icon="search" data-iconpos="top"id="search">Search</a></li>
+					<li><a href="#homepage" data-role="button" data-icon="home" data-iconpos="top">Home</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!--footer-->
+</div><!-- createpage -->	
+	
+	<!-- JavaScript here -->
+  	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>						<!-- JQuery Core -->
+	<script src="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.js"></script> 	<!-- JQuery Mobile -->
+	<script type="text/javascript" src="js/jquery-ui-1.8.19.custom.min.js"></script>		<!-- JQuerey UI -->
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script> -->	
+	<script src="js/mongohq.js" type="text/javascript"></script>							<!-- MongoHQ JQuery Plugin -->
+		
+<div id="fb-root"></div>
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+<script src="js/facebookjs.js" type="text/javascript"></script>
+<script>
+		$(function() {
+			$( "#date" ).datepicker();
+		});
+	</script>
+</script>
+
+</body>
+</html>
