@@ -16,15 +16,20 @@
 	<meta http-equiv="cleartype" content="on">
 	
 	<!-- StyleSheets here -->
+	<link type="text/css" href="css/jquery-ui-1.8.19.custom.css" rel="Stylesheet" />
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.css" /> <!-- JQuery Mobile b3   -->
-	<!-- <link type="text/css" href="css/jquery-ui-1.8.19.custom.css" rel="Stylesheet" /> -->
 	
-
 	<style type="text/css">
+		#fbloginbtn{
+			display: block;
+			width: 250px;
+			height: 50px;
+			margin: 0 auto;
+		}
 		
 	</style>
 	<!-- JavaScript topside-->
-	<!--<script src="js/libs/modernizr.custom.min.js"></script>-->
+	<script src="js/libs/modernizr.custom.min.js"></script>
 
 </head>
 
@@ -34,7 +39,12 @@
 		<div data-role="header">
 			<h1>Login</h1>
 		</div><!-- /header -->
-			<fb:login-button onlogin="login();" id="login" scope="create_event, user_events">Login with Facebook</fb:login-button>
+		<div data-role="content">
+			<div id="fbloginbtnwrapper">
+				<fb:login-button id="fbloginbtn" onlogin="login();" id="login" scope="create_event, user_events">Login with Facebook</fb:login-button>		
+			</div>
+		</div>
+			
 	</div><!-- loginpage -->
 
 
@@ -68,9 +78,10 @@
 		</div><!-- /header -->
 		<div data-role="content">
 
-			<ul data-role="listview" data-inset="true" data-filter="true" id="searchlist">
+			<ul data-role="listview" data-filter="true" id="searchlist">
 			
 			</ul>
+
 			
 		</div>		
 
@@ -94,9 +105,33 @@
 			<h1>Featured</h1>
 		</div><!-- /header -->
 		<div data-role="content">
-			<ul data-role="listview" data-inset="true" data-filter="true" id="featuredlist">
-			
+			<div class="content-primary">	
+			<ul data-role="listview" data-filter="true">
+				<li><a href="index.html">Acura</a></li>
+				<li><a href="index.html">Audi</a></li>
+				<li><a href="index.html">BMW</a></li>
+				<li><a href="index.html">Cadillac</a></li>
+				<li><a href="index.html">Chrysler</a></li>
+				<li><a href="index.html">Dodge</a></li>
+				<li><a href="index.html">Ferrari</a></li>
+				<li><a href="index.html">Ford</a></li>
+				<li><a href="index.html">GMC</a></li>
+				<li><a href="index.html">Honda</a></li>
+				<li><a href="index.html">Hyundai</a></li>
+				<li><a href="index.html">Infiniti</a></li>
+				<li><a href="index.html">Jeep</a></li>
+				<li><a href="index.html">Kia</a></li>
+				<li><a href="index.html">Lexus</a></li>
+				<li><a href="index.html">Mini</a></li>
+				<li><a href="index.html">Nissan</a></li>
+				<li><a href="index.html">Porsche</a></li>
+				<li><a href="index.html">Subaru</a></li>
+				<li><a href="index.html">Toyota</a></li>
+				<li><a href="index.html">Volkswagon</a></li>
+				<li><a href="index.html">Volvo</a></li>
 			</ul>
+			</div><!--/content-primary -->		
+
 		</div><!-- content -->
 
 		<div data-role="footer" data-position="fixed">		
@@ -247,10 +282,6 @@
   							<option>Online</option>
 						</select>
 					</div>
-					 
-					<div data-role="fieldcontain">
-						<input type="text" name="location" id="location" value="" placeholder="Location" class="required" minlength="5"/>
-					</div>
 					 -->
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<input type="submit" value="Create Event" id="create-event-btn" class="submit"/>
@@ -286,11 +317,13 @@
 			<h2 id="tournamentname"></h2>
 			<div class="ui-grid-a">
 				<div class="ui-block-a"><img src="http://inklingmedia.net/wp-content/uploads/2010/11/event-image1.png"></div>
-				<div class="ui-block-b" id="timedate">
-					<p id="eventdate"></p>
-					<p id="start_time"></p>
-					<p id="end_time"></p>
+				<div class="ui-block-b detailitems">
+						<div id="eventdate"></div>
+						<div id="start_time"></div>
+						<div id="end_time"></div>
+						<div id="location"></div>
 				</div>
+						
 			</div><!-- /grid-a -->
 			<p id="detaildescription"></p>
 			
@@ -317,7 +350,31 @@
 			<a href="#searchpage"  data-role="button" class="ui-btn-right">Save</a>
 		</div><!-- /header -->
 		<div data-role="content">
-			
+			<div data-role="content" id="created-event">
+				<form action="index.html/#homepage" method="editEvents();" id="created-event-form">
+					<div data-role="fieldcontain">
+						<input type="text" name="title" id="title" value="" placeholder="" class="required" minlength="5"/>
+					</div>
+					<div data-role="fieldcontain">
+						<textarea name="textarea" id="editdescription" placeholder="" class="required" minlength="5"></textarea>
+					</div>
+					<div data-role="fieldcontain">
+						<input name="date" id="editdate" type="date" data-role="datebox" class="required" minlength="5" value="">
+					</div>
+					<div data-role="fieldcontain">
+						<input type="text" name="editstart_time" id="editstart_time" placeholder="" class="required" minlength="5"/>
+					</div>
+					<div data-role="fieldcontain">
+						<input type="text" name="editend_time" id="editend_time" placeholder="" class="required" minlength="5"/>
+					</div>
+					<div data-role="fieldcontain">
+						<input type="text" name="editlocation" id="editlocation" placeholder="" class="required" minlength="5"/>
+					</div>
+					<div data-role="fieldcontain" class="ui-hide-label">
+						<input type="save" value="" id="create-event-btn" class="submit"/>
+					</div>
+				</form>
+			</div>
 			
 		</div><!-- content -->
 		<div data-role="footer" data-position="fixed">		
@@ -336,7 +393,6 @@
   	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>						<!-- JQuery Core -->
 	<script src="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.js"></script> 	<!-- JQuery Mobile -->
 	<script type="text/javascript" src="js/jquery-ui-1.8.19.custom.min.js"></script>		<!-- JQuerey UI -->
-	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script> -->	
 	<script src="js/mongohq.js" type="text/javascript"></script>							<!-- MongoHQ JQuery Plugin -->
 		
 <div id="fb-root"></div>
@@ -346,7 +402,6 @@
 		$(function() {
 			$( "#date" ).datepicker();
 		});
-	</script>
 </script>
 
 </body>
