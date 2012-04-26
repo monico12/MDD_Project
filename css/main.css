@@ -1,0 +1,87 @@
+p, li{
+	font-family: Helvetica;
+}
+		
+#fbloginbtn{
+			display: block;
+			width: 250px;
+			height: 50px;
+			margin: 0 auto;
+}
+		
+#deatilitems{
+	list-style-type: none;
+}
+		
+.ui-body-a, .ui-body-b{
+	background: url("http://subtlepatterns.com/patterns/px_by_Gre3g.png") repeat top left;
+}
+
+h2{
+	text-align: center;
+}
+
+h3{
+	text-align: center;
+}
+
+#fbloginbtnwrapper{
+	background: url(../assets/fblogo.png) no-repeat top left;
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+}
+
+.fb_button{
+	-webkit-border-radius: 5px; 
+     -moz-border-radius: 5px; 
+          border-radius: 5px; 
+  -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+} 
+
+.fb_button.fb_button_medium{
+	background: url(../images/facebook-btn.png) no-repeat;
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+}
+
+.fb_button.fb_button_medium:active{
+	background: url(../images/facebook-btn.png) no-repeat;
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+}
+
+.fb_button.fb_button_text{
+	display: hidden;
+}
+
+.ui-content .fb_button .fb_button_text, .fb_button_rtl .fb_button_text{
+ 	background: transparent;
+ 	border: none;
+	padding: 13px 0 0 65px;
+	font-size: 14px;
+	
+}
+
+
+
+.ui-content a.fb_button:active .fb_button_text, a.fb_button_rtl:active .fb_button_text, .fb_button:active .fb_button_text, .fb_button_rtl:active .fb_button_text{
+	border: none;
+	background: none;
+}
+
+.ui-content .fb_button .fb_button_text:active, .fb_button_rtl .fb_button_text:active{
+	background: transparent;
+ 	border: none;
+ 	width: 200px;
+	height: 200px;
+}
+
+#facebook-login{
+	display: block;
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+}
