@@ -2,17 +2,14 @@
 
 //=================================mongohq stuff=================================//
 mongoGetDocs = function (obj){
-  //var q = {"csvDays":"1"}
   $.ajax({
     url: 'https://api.mongohq.com/databases/Tournaments4Gamers/collections/events',
     type: 'GET',
     dataType: 'json',
     data: {
       "_apikey":"wc4gj9zp6pmmwt55zqak",
-      
     },
     success: function(r) {
-      //console.log("Mongo: success",r);
       data.arySpecials = r;
       getLocationIDs();
     },
@@ -97,26 +94,29 @@ init = function(){
 
 login = function(){
 	FB.api('/me', function(response) {
-		//localStorage.setItem('fb_me', JSON.stringify(response));
 		checkLogin();
 		$.mobile.changePage( "#homepage", "slideup" );
 	});
 };//login
 
-createEvents = function(title,userDesc,people,time,location){
-	FB.api('/me/events','post',{name:title,start_time:time,location:location,description:userDesc},function(resp) {
-    	var newId = resp.id;
-		FB.api('/' + newId + '/invited?users='+people, 'post', function(response){
-			if(response == true){
-				$.mobile.changePage( "#homepage","slideup" );
-			};
-		});	  		
+createEvents = function(title,userDesc,people,utcStart,utcEnd, location){
+	console.log(utcStart);
+	console.log(utcEnd);
+	
+	FB.api('/me/events','post',{name:title,start_time:utcStart,end_time:utcEnd,location:location,description:userDesc},function(resp) {
+    	if(resp == true)
+    	{
+    		var newId = resp.id;
+			FB.api('/' + newId + '/invited?users='+people, 'post', function(response){
+				if(response == true){
+					$.mobile.changePage( "#homepage","slideup" );
+				};
+			});
+    	}
+    	  		
 	});
 	$.mobile.changePage( "#homepage","slideup" );
 };//createEvents
-
-
-
 
 init();
 checkLogin();
@@ -124,12 +124,8 @@ var events;
 
 $.getJSON('https://api.mongohq.com/databases/Tournaments4Gamers/collections/events/documents?_apikey=wc4gj9zp6pmmwt55zqak', function(data) {
 	events = data;
-	//console.log(data);
 });//
 
-//$(jsonData.Featured).each(function(){
-  //	$("#prodList").append("<li><a data-prodID='"+this.itemID + "' href='#prodDetail'>" + this.title + "</a></li>");	
-  //});
 $('#editpage').live('click', function(e){
 							
 	//$('#editdescription').html(this.description);
@@ -144,13 +140,10 @@ $('#search').live('click', function(e){
   		db_name : 'Tournaments4Gamers',
   		col_name: 'events',
   		success : function(data){
-    		/*for(i in data){
-				$("#searchlist").append("<li><a href='#eventdetails' id='events'>" + data[i].name + "</a></li>");
-			}*/
+    		
 			$(events).each(function(){
   				$("#searchlist").append("<li><a data-eventid='"+this._id.$oid + "' href='#eventdetails'>" + this.name + "</a></li>").listview('refresh');
-  				console.log(this._id.$oid);
-  				//eventID = this._id.$oid;
+  				
   			});
   			
   			$("li a").click(function(){
@@ -161,14 +154,12 @@ $('#search').live('click', function(e){
   					if(this._id.$oid == tarID){
   						
   						$("#tournamentname").html(this.name);
-  						$("#eventdate").html("Date: " + this.date);
-  						$("#start_time").html("From:  " + this.start_time);
-  						$("#end_time").html("To:  " + this.end_time);
-  						$("#location").html(this.location);
+  						$("#eventdate").html(this.date);
+  						$("#detailstarttime").html(this.start_time);
+  						$("#detailendtime").html(this.end_time);
+  						$("#detaillocation").html(this.location);
   						$("#detaildescription").html(this.description);
-  						
-  						//console.log(this.start_time);
-  						//console.log(this.end_time);		
+  								
   					}
   				});
   				
@@ -191,18 +182,57 @@ $('#created-event-form').live('submit',function(e){
 		start_time = $('#start_time').val(),
 		end_time = $('#end_time').val(),
 		location = $('#location').val(),
+		startampm = $('#startampm').val(),
 		people = [];
 		
 		//calculating time for Facebook API
 		//var time = $('#time').val().substr(0,4) + ':00';
 		//still being hard coded in
-		var time = end_time;
-		var complete = date + ' ' + time;
-		console.log(complete);
-		var timeComplete = parseInt(Date.parse(complete)/1000);
-		console.log(timeComplete);
-		createEvents(title,userDescription,people,timeComplete,location);
+		//var time = start_time;
+		var completeStart = date + ' ' + start_time;
+		var timeCompleteStart = parseInt(Date.parse(completeStart)/1000);
+		//createEvents(title,userDescription,people,timeComplete,location);
 		
+		
+		var completeEnd = date + ' ' + end_time;
+		//console.log(complete);
+		var timeCompleteEnd = parseInt(Date.parse(completeEnd)/1000);
+		
+		console.log("non utc start: ", timeCompleteStart);
+		console.log("non utc end: ", timeCompleteEnd);
+		
+		var utcYearEnd = new Date(completeEnd).getUTCFullYear(),
+			utcMonthEnd = new Date(completeEnd).getUTCMonth(),
+			utcDateEnd = new Date(completeEnd).getUTCDate(),
+			utcHoursEnd = new Date(completeEnd).getUTCHours(),
+			utcMinsEnd = new Date(completeEnd).getUTCMinutes();
+			
+		var utcYearStart = new Date(completeStart).getUTCFullYear(),
+			utcMonthStart = new Date(completeStart).getUTCMonth(),
+			utcDateStart = new Date(completeStart).getUTCDate(),
+			utcHoursStart = new Date(completeStart).getUTCHours(),
+			utcMinsStart = new Date(completeStart).getUTCMinutes();	
+		
+		var utcEnd = Date.UTC(utcYearEnd,utcMonthEnd,utcDateEnd,utcHoursEnd,utcMinsEnd,0);						
+		var utcStart = Date.UTC(utcYearStart,utcMonthStart,utcDateStart,utcHoursStart,utcMinsStart,0);
+		
+		utcEnd = utcEnd.toString();
+		utcStart = utcStart.toString();
+		
+		utcEnd = utcEnd.substr(0, 10);
+		utcStart = utcStart.substr(0, 10);
+		
+		//utcEnd = parseInt(utcEnd);
+		//utcStart = parseInt(utcStart);
+		
+		console.log("start date:   ",completeStart);
+		console.log("end date:   ",completeEnd);
+		
+		console.log("start:   ",utcStart);
+		console.log("end:   ",utcEnd);
+		
+		//createEvents(title,userDescription,people,timeCompleteStart,timeCompleteEnd,location);
+		createEvents(title,userDescription,people,utcStart,utcEnd,location);
 		//create event in database
 		var data = 
 				{
@@ -214,7 +244,7 @@ $('#created-event-form').live('submit',function(e){
   					'location' : location
   				}
 		
-		mongoCreateDocument(data);
+		//mongoCreateDocument(data);
 		
 		return false;
 });//create-event-form
